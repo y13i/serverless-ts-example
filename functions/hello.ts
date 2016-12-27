@@ -1,4 +1,6 @@
-export function hello(event, context, callback): void {
+import {LambdaExecutionContext} from "../types";
+
+export function hello(event, context: LambdaExecutionContext, callback): void {
   const response = {
     statusCode: 200,
 
@@ -6,7 +8,7 @@ export function hello(event, context, callback): void {
     },
 
     body: JSON.stringify({
-      "message": "Hello TypeScript!!!!"
+      message: `Hello!!!! I am a function named "${context.functionName}"`
     })
   };
 
