@@ -1,0 +1,13 @@
+service: oreno-sls-ts
+provider:
+  name: aws
+  runtime: nodejs4.3
+plugins:
+- serverless-webpack
+functions:
+  hello:
+    handler: index.hello
+    events:
+    - http:
+        path: hello
+        method: get
