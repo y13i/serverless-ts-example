@@ -1,7 +1,12 @@
-service: oreno-sls-ts
+service: serverless-ts
 provider:
   name: aws
   runtime: nodejs4.3
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+    - lambda:ListFunctions
+    Resource: "*"
 plugins:
 - serverless-webpack
 functions:
@@ -10,4 +15,10 @@ functions:
     events:
     - http:
         path: hello
+        method: get
+  listfunctions:
+    handler: index.listfunctions
+    events:
+    - http:
+        path: listfunctions
         method: get
