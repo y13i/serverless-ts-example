@@ -11,13 +11,13 @@ plugins:
 - serverless-webpack
 functions:
   hello:
-    handler: index.hello
+    handler: hello.default
     events:
     - http:
         path: hello
         method: get
   listfunctions:
-    handler: index.listfunctions
+    handler: listfunctions.default
     events:
     - http:
         path: listfunctions

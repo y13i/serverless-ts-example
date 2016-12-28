@@ -1,6 +1,7 @@
+import * as λ from "apex.js";
 import {LambdaExecutionContext} from "../types";
 
-export function hello(event, context: LambdaExecutionContext, callback): void {
+export default λ((event, context: LambdaExecutionContext): any => {
   const response = {
     statusCode: 200,
 
@@ -12,5 +13,5 @@ export function hello(event, context: LambdaExecutionContext, callback): void {
     })
   };
 
-  callback(null, response);
-};
+  return response;
+});

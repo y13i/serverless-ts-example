@@ -1,8 +1,15 @@
 var path = require("path");
+var glob = require("glob");
 
 module.exports = {
-  entry:  "./index.ts",
-  target: "node",
+  entry: glob.sync("./functions/*.ts").reduce(function(acc, item) {
+    var obj = {};
+    obj[path.basename(item, ".ts")] = item;
+    return Object.assign(acc, obj);
+  }, {}),
+
+  target:  "node",
+  devtool: "source-map",
 
   module: {
     loaders: [
@@ -31,6 +38,6 @@ module.exports = {
   output: {
     libraryTarget: "commonjs",
     path:          path.join(__dirname, ".built"),
-    filename:      "index.js",
+    filename:      "[name].js",
   },
 };

@@ -1,9 +1,10 @@
+import * as λ from "apex.js";
 import * as AWS from "aws-sdk";
 import {LambdaExecutionContext} from "../types";
 
 const lambda = new AWS.Lambda();
 
-export async function listfunctions(event, context: LambdaExecutionContext, callback): Promise<void> {
+export default λ(async (event, context: LambdaExecutionContext): Promise<any> => {
   const functions  = [];
   let   nextMarker = null;
 
@@ -14,9 +15,9 @@ export async function listfunctions(event, context: LambdaExecutionContext, call
     nextMarker = response.NextMarker;
   } while (nextMarker);
 
-  callback(null, {
+  return Promise.resolve({
     statusCode: 200,
     headers:    {},
     body:       JSON.stringify({functions}),
   });
-};
+});
